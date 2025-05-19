@@ -3,7 +3,8 @@ import Map from "../components/map"
 
 export default async function Home() {
 
-    const data = await fetch('http://localhost:3000/weather-stations')
+    const apiBase = process.env.API_BASE || ''
+    const data = await fetch(`${apiBase}/weather-stations`)
     const weatherStations = await data.json() as IWeatherStation[]
     
 
