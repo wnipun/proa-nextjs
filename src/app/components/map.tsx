@@ -1,9 +1,27 @@
 "use client"
 
-import { APIProvider, Map as GoogleMap } from "@vis.gl/react-google-maps"
+import {
+  APIProvider,
+  Map as GoogleMap,
+  Marker,
+} from "@vis.gl/react-google-maps"
 
-export default function Map() {
+export default function Map({
+  weatherStations=[],
+}: {
+  weatherStations: IWeatherStation[]
+}) {
   const apiKey = process.env.GOOGLE_MAPS_API_KEY || ""
+
+  const markers = weatherStations.map((weatherStation) => (
+    <Marker
+      key={weatherStation.id}
+      position={{
+        lat: Number(weatherStation.latitude),
+        lng: Number(weatherStation.longitude),
+      }}
+    />
+  ))
 
   return (
     <div className="bg-amber-50 rounded-2xl h-[100%] overflow-hidden">
@@ -14,7 +32,9 @@ export default function Map() {
           defaultZoom={3}
           gestureHandling={"greedy"}
           disableDefaultUI={true}
-        />
+        >
+          {markers}
+        </GoogleMap>
       </APIProvider>
     </div>
   )
