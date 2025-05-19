@@ -6,4 +6,5 @@ interface IWeatherStation {
   state: string
   latitude: string
   longitude: string
+  data: IData[]
 }

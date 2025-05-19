@@ -5,7 +5,7 @@ import {
   InfoWindow,
   useAdvancedMarkerRef,
 } from "@vis.gl/react-google-maps"
-import { useCallback, useState } from "react"
+import React, { useCallback, useState } from "react"
 import WeatherStationDetailBlock from "./weather-station-detail-block"
 import Image from "next/image"
 
@@ -26,6 +26,25 @@ export default function MarkerWithInfoWindow({
 
   const handleClose = useCallback(() => setInfoWindowShown(false), [])
 
+  const data =
+    weatherStation.data.map((data) => {
+      const { id, weather_station_id, ...rest } = data
+      return Object.entries(rest)
+    }) ?? []
+
+  let dataEntries: React.ReactElement[] = []
+  if (data.length) {
+    dataEntries = data[0]
+      .filter((entry) => entry[1])
+      .map((entry) => (
+        <WeatherStationDetailBlock
+          key={entry[0]}
+          title={entry[0]}
+          value={entry[1]}
+        />
+      ))
+  }
+
   return (
     <>
       <AdvancedMarker
@@ -33,7 +52,12 @@ export default function MarkerWithInfoWindow({
         position={position}
         onClick={handleMarkerClick}
       >
-        <Image src={`/solar-icon.png`} alt={weatherStation.ws_name} width={30} height={30}/>
+        <Image
+          src={`/solar-icon.png`}
+          alt={weatherStation.ws_name}
+          width={30}
+          height={30}
+        />
       </AdvancedMarker>
 
       {infoWindowShown && (
@@ -50,6 +74,7 @@ export default function MarkerWithInfoWindow({
             title="Portfolio"
             value={weatherStation.portfolio}
           />
+          {dataEntries}
         </InfoWindow>
       )}
     </>
