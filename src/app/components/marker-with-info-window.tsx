@@ -43,6 +43,7 @@ export default function MarkerWithInfoWindow({
           headerContent={
             <h2 className="font-bold uppercase">{weatherStation.ws_name}</h2>
           }
+          className="space-y-[0.5rem]"
         >
           <WeatherStationDetailBlock title="Site" value={weatherStation.site} />
           <WeatherStationDetailBlock
