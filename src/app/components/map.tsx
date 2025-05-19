@@ -8,7 +8,8 @@ export default function Map({
 }: {
   weatherStations: IWeatherStation[]
 }) {
-  const apiKey = process.env.GOOGLE_MAPS_API_KEY || ""
+  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ""
+  const mapId = process.env.NEXT_PUBLIC_GOOGLE_MAP_ID || ""
 
   const markers = weatherStations.map((weatherStation) => (
     <MarkerWithInfoWindow
@@ -30,7 +31,7 @@ export default function Map({
           defaultZoom={3}
           gestureHandling={"greedy"}
           disableDefaultUI={true}
-          mapId={`DEMO_MAP_ID`}
+          mapId={mapId}
         >
           {markers}
         </GoogleMap>
