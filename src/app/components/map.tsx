@@ -3,18 +3,18 @@
 import {
   APIProvider,
   Map as GoogleMap,
-  Marker,
 } from "@vis.gl/react-google-maps"
+import MarkerWithInfoWindow from "./marker-with-info-window"
 
 export default function Map({
-  weatherStations=[],
+  weatherStations = [],
 }: {
   weatherStations: IWeatherStation[]
 }) {
   const apiKey = process.env.GOOGLE_MAPS_API_KEY || ""
 
   const markers = weatherStations.map((weatherStation) => (
-    <Marker
+    <MarkerWithInfoWindow
       key={weatherStation.id}
       position={{
         lat: Number(weatherStation.latitude),
@@ -32,6 +32,7 @@ export default function Map({
           defaultZoom={3}
           gestureHandling={"greedy"}
           disableDefaultUI={true}
+          mapId={`DEMO_MAP_ID`}
         >
           {markers}
         </GoogleMap>
