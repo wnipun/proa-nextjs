@@ -1,9 +1,6 @@
 "use client"
 
-import {
-  APIProvider,
-  Map as GoogleMap,
-} from "@vis.gl/react-google-maps"
+import { APIProvider, Map as GoogleMap } from "@vis.gl/react-google-maps"
 import MarkerWithInfoWindow from "./marker-with-info-window"
 
 export default function Map({
@@ -20,6 +17,7 @@ export default function Map({
         lat: Number(weatherStation.latitude),
         lng: Number(weatherStation.longitude),
       }}
+      weatherStation={weatherStation}
     />
   ))
 
