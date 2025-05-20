@@ -15,7 +15,6 @@ export default function WeatherStationDetailBlock({
     unit: "",
     long_name: "",
   }
-  // console.log(t)
 
   return (
     <dl className="flex items-center gap-[0.25rem]">
