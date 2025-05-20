@@ -16,22 +16,29 @@ export default function MarkerWithInfoWindow({
   position: { lat: number; lng: number }
   weatherStation: IWeatherStation
 }) {
+  // Reference for the marker and its instance
   const [markerRef, marker] = useAdvancedMarkerRef()
+
+  // State to control visibility of the info window
   const [infoWindowShown, setInfoWindowShown] = useState(false)
 
+  // Toggle info window on marker click
   const handleMarkerClick = useCallback(
     () => setInfoWindowShown((isShown) => !isShown),
     []
   )
 
+  // Close info window handler
   const handleClose = useCallback(() => setInfoWindowShown(false), [])
 
+  // Extract weather station data
   const data =
     weatherStation.data.map((data) => {
       const { id, weather_station_id, ...rest } = data
       return Object.entries(rest)
     }) ?? []
 
+  // Prepare data, use the first data entry if available
   let dataEntries: React.ReactElement[] = []
   if (data.length) {
     dataEntries = data[0]
