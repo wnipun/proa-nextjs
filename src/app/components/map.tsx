@@ -34,8 +34,8 @@ export default function Map({
       <APIProvider apiKey={apiKey}>
         <GoogleMap
           style={{ width: "100%", height: "80vh" }}
-          defaultCenter={{ lat: 22.54992, lng: 0 }}
-          defaultZoom={3}
+          defaultCenter={{ lat: -25.2744, lng: 133.7751 }}
+          defaultZoom={4}
           gestureHandling={"greedy"}
           disableDefaultUI={true}
           mapId={mapId}
