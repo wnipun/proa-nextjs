@@ -2,23 +2,33 @@
 
 import { APIProvider, Map as GoogleMap } from "@vis.gl/react-google-maps"
 import MarkerWithInfoWindow from "./marker-with-info-window"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { setVariables } from "../../../stores/features/variables-slice"
+import { RootState } from "../../../stores/store"
+import { useEffect } from "react"
 
 export default function Map({
-  weatherStations,
   variables,
 }: {
-  weatherStations: IWeatherStation[]
-  variables: IVariable[]
+  variables: Promise<IVariable[]>
 }) {
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ""
   const mapId = process.env.NEXT_PUBLIC_GOOGLE_MAP_ID || ""
 
-  const dispatch = useDispatch()
-  dispatch(setVariables(variables))
+  const allWeatherStations = useSelector(
+    (state: RootState) => state.weatherStations.value
+  )
 
-  const markers = weatherStations.map((weatherStation) => (
+  const dispatch = useDispatch()
+  useEffect(() => {
+    async function fetchVariables() {
+      const resolvedVariables = await variables
+      dispatch(setVariables(resolvedVariables))
+    }
+    fetchVariables()
+  }, [variables, dispatch])
+
+  const markers = allWeatherStations.map((weatherStation) => (
     <MarkerWithInfoWindow
       key={weatherStation.id}
       position={{
