@@ -19,8 +19,8 @@ export default function WeatherStationDetailBlock({
 
   return (
     <dl className="flex items-center gap-[0.25rem]">
-      {long_name && <dt className="font-bold">{long_name}:</dt>}
-      {!long_name && <dt className="font-bold">{title}:</dt>}
+      {long_name && <dt className="font-bold capitalize">{long_name}:</dt>}
+      {!long_name && <dt className="font-bold capitalize">{title}:</dt>}
 
       {unit && title !== 'timestamp' && <dd>{value} {unit}</dd>}
       {!unit && title !== 'timestamp' && <dd>{value}</dd>}
