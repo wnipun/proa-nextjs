@@ -8,7 +8,10 @@ export default function WeatherStationDetailBlock({
   title: string
   value: string
 }) {
+  // Get variables from Redux store
   const variables = useSelector((state: RootState) => state.variables.value)
+
+  // Get variable that match the title only if available
   const { unit, long_name } = variables.filter(
     (variable) => variable.name === title
   )[0] ?? {
