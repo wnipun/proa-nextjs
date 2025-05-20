@@ -15,10 +15,12 @@ export default function Map({
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ""
   const mapId = process.env.NEXT_PUBLIC_GOOGLE_MAP_ID || ""
 
+  // Get all weather stations from Redux store
   const allWeatherStations = useSelector(
     (state: RootState) => state.weatherStations.value
   )
 
+  // Fetch variables when component mount and set it to Redux store
   const dispatch = useDispatch()
   useEffect(() => {
     async function fetchVariables() {
@@ -28,6 +30,7 @@ export default function Map({
     fetchVariables()
   }, [variables, dispatch])
 
+  // Create marker components for each weather station
   const markers = allWeatherStations.map((weatherStation) => (
     <MarkerWithInfoWindow
       key={weatherStation.id}
