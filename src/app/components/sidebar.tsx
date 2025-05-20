@@ -9,12 +9,15 @@ import { setWeatherStations } from "../../../stores/features/weather-stations-sl
 export default function Sidebar() {
   const dispatch = useDispatch()
 
+  // Set filter value to Redux store on change
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     dispatch(setFilter(event.target.value))
   }
 
+  // Set filter value
   const filter = useSelector((state: RootState) => state.filter.value)
 
+  // Fetch weather stations on component mount or filter change
   useEffect(() => {
     async function fetchWeatherStations() {
       const weatherStations = await getWeatherStations(filter)
