@@ -1,10 +1,11 @@
 "use client"
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { setFilter } from "../../../stores/features/filter-slice"
-import { RootState } from "../../../stores/store"
-import { getWeatherStations } from "../lib/weather-stations"
-import { setWeatherStations } from "../../../stores/features/weather-stations-slice"
+import { setFilter } from "../../../../stores/features/filter-slice"
+import { RootState } from "../../../../stores/store"
+import { getWeatherStations } from "../../lib/weather-stations"
+import { setWeatherStations } from "../../../../stores/features/weather-stations-slice"
+import styles from './sidebar.module.css'
 
 export default function Sidebar() {
   const dispatch = useDispatch()
@@ -27,8 +28,8 @@ export default function Sidebar() {
   }, [filter, dispatch])
 
   return (
-    <aside className="bg-amber-50 p-[1rem] min-w-[15%] rounded-2xl">
-      <h2 className="font-bold text-lg">Filters</h2>
+    <aside className={styles.sidebar}>
+      <h2>Filters</h2>
       <select onChange={handleChange} name="states" className="text-sm">
         <option value="">All</option>
         <option value="VIC">VIC</option>
