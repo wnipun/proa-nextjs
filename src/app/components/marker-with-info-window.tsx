@@ -34,8 +34,7 @@ export default function MarkerWithInfoWindow({
   // Extract weather station data
   const data =
     weatherStation.data.map((data) => {
-      const { id, weather_station_id, ...rest } = data
-      return Object.entries(rest)
+      return Object.entries({...data, id: '', weather_station_id: ''})
     }) ?? []
 
   // Prepare data, use the first data entry if available
